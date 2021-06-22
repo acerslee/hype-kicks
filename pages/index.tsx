@@ -19,10 +19,10 @@ export default function Home() {
 
   const renderTeamPage = (id: number) => {
     router.push({
-      pathname: '/teams/[tid]',
-      query: { tid: id }
+      pathname: '/teams',
+      query: { id }
     })
-  }
+  };
 
   return (
     <>
