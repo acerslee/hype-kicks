@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from '../components/navbar';
 import Teams from '../components/nbaTeams';
+import { useRouter } from 'next/router';
 
 export default function Home() {
+  const router = useRouter()
   const [teamData, setTeamData] = useState<any>(null)
 
   useEffect(() => {
@@ -15,10 +17,22 @@ export default function Home() {
       .catch(err => console.error(err))
   }, [])
 
+  const renderTeamPage = (id: number) => {
+    router.push({
+      pathname: '/teams/[tid]',
+      query: { tid: id }
+    })
+  }
+
   return (
     <>
       <Navbar />
-      <Teams teams = {teamData}/>
+      {teamData &&
+        <Teams
+          teams = {teamData}
+          renderTeamPage = {renderTeamPage}
+        />
+      }
     </>
   )
 }
