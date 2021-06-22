@@ -9,7 +9,7 @@ export default function Home() {
   const [teamData, setTeamData] = useState<any>(null)
 
   useEffect(() => {
-    axios.get('/api/teams')
+    axios.get('/api/teams/teams')
       .then(({data}) => {
         console.log(data.data)
         setTeamData(data.data)
