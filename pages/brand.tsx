@@ -1,6 +1,7 @@
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
-import React from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 interface Props{
   query: object
@@ -8,10 +9,27 @@ interface Props{
 
 const Brandpage: React.FC<Props> = ({query}) => {
 
-  console.log(query)
+  const [ shoeData, setShoeData ] = useState<any>(null);
+  const [ errorMessage, setErrorMessage ] = useState<boolean>(false)
+
+  useEffect(() => {
+    axios
+      .get(`/api/shoes/${query.brand}`)
+      .then(({data}) => {
+        if (data.count === 0){
+          setErrorMessage(true)
+        } else setShoeData(data.results)
+      })
+      .catch(err => console.error(err))
+  }, [])
+
   return(
     <>
       <Navbar />
+      {!errorMessage
+        ? <p>placeholder</p>
+        : <p>Cannot find any shoes :/</p>
+      }
       <Footer />
     </>
   )

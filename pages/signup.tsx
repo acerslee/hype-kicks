@@ -2,7 +2,6 @@ import Navbar from '../components/navbar';
 import Footer from '../components/footer';
 import Link from 'next/link';
 
-
 const SignUpPage = () => {
   return(
     <>

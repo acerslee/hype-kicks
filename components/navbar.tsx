@@ -11,9 +11,9 @@ const Navbar = () => {
   const [brands, setBrands] = useState<(string|number)[]>([])
 
   useEffect(() => {
-    axios.get('/api/brands')
+    axios
+      .get('/api/brands')
       .then(({data}) => {
-        console.log(data.results)
         setBrands(data.results)
       })
       .catch(err => console.error(err))
