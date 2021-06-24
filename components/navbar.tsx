@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import Brands from './Brands';
 
 const Navbar = () => {
   return(
@@ -17,11 +16,11 @@ const Navbar = () => {
           </Link>
         </div>
         <div className = "space-x-20">
-          <span className = "text-white text-xl md:text-base sm:text-sm">Brands</span>
+          <span className = "text-white text-4xl md:text-lg sm:text-m">Brands</span>
           <Link href = '/about'>
-            <span className = "text-white text-xl md:text-base sm:text-sm">About</span>
+            <span className = "text-white text-4xl md:text-lg sm:text-m">About</span>
           </Link>
-          <span className = "text-white text-xl md:text-base sm:text-sm">Login</span>
+          <span className = "text-white text-4xl md:text-lg sm:text-m">Login</span>
         </div>
       </div>
     </header>

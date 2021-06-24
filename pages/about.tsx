@@ -1,4 +1,5 @@
 import Navbar from '../components/navbar';
+import Footer from '../components/footer';
 
 const AboutPage = () => {
   return(
@@ -12,6 +13,7 @@ const AboutPage = () => {
         <p className = "mb-2 text-lg">Special thanks to the TG4 Solutions team for providing with the data.</p>
         <p className = "text-lg">Hype Kicks is developed by Alex Lee.</p>
       </div>
+      <Footer />
     </>
   )
 };
