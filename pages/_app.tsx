@@ -20,7 +20,7 @@ class MyApp extends App {
     return(
       <>
       <Head>
-         <title>NBA</title>
+         <title>Hype Kicks</title>
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           <meta name="description" content="See the stats of NBA players and teams."></meta>
           <meta charSet="UTF-8"></meta>
