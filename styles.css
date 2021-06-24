@@ -13,6 +13,7 @@
 .mega-menu {
   display: none;
   left: 0;
+  top: 100%;
   position: absolute;
   text-align: left;
   width: 100%;
