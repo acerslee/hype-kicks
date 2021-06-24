@@ -40,7 +40,7 @@
 
 .toggle-input:checked + label {
   color: white;
-  background: #2c5282; /*@apply bg-blue-800 */
+  background: rgb(6 ,78 59)
 }
 
 .toggle-input:checked ~ label:after {
