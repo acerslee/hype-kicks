@@ -116,7 +116,9 @@ const Navbar = () => {
           <Link href = '/about'>
             <li className = "relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold hover:bg-green-900 hover:text-white">About</li>
           </Link>
-          <li className = "relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold hover:bg-green-900 hover:text-white">Login</li>
+          <Link href = '/login'>
+            <li className = "relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold hover:bg-green-900 hover:text-white">Login</li>
+          </Link>
         </ul>
       </div>
     </nav>
