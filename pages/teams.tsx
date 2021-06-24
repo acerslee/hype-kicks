@@ -7,10 +7,13 @@ const TeamPage = ({ query }) => {
   const [teamData, setTeamData] = useState<object>({})
 
   useEffect(() => {
-    axios.get(`/api/teams/${query.id}`)
-      .then(({data}) => {
-        console.log(data)
-        setTeamData(data)
+    axios.all([
+      axios.get('/api/players/players'),
+      axios.get(`/api/teams/${query.id}`)
+    ])
+      .then(responses => {
+        console.log(responses)
+        setTeamData(responses[1].data)
       })
       .catch(err => console.error(err))
   },[])

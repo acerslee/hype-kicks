@@ -2,7 +2,7 @@ import axios from "axios"
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const url = "https://www.balldontlie.io/api/v1/players"
+  const url = "https://api.thesneakerdatabase.dev/v2/sneakers"
 
   await axios
     .get(url)
@@ -10,6 +10,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       res.send(data)
     })
     .catch(err => {
+      console.log(err)
       res.status(500).send(err)
     })
 }

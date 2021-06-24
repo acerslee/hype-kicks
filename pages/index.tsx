@@ -1,25 +1,25 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from '../components/navbar';
-import Teams from '../components/nbaTeams';
+// import Brands from '../components/Brands';
 import { useRouter } from 'next/router';
 
 export default function Home() {
   const router = useRouter()
-  const [teamData, setTeamData] = useState<any>(null)
+  const [brands, setBrands] = useState<any>(null)
 
   useEffect(() => {
-    axios.get('/api/teams/teams')
+    axios.get('/api/brands')
       .then(({data}) => {
-        console.log(data.data)
-        setTeamData(data.data)
+        console.log(data.results)
+        setBrands(data.results)
       })
       .catch(err => console.error(err))
   }, [])
 
   const renderTeamPage = (id: number) => {
     router.push({
-      pathname: '/teams',
+      pathname: '/brands',
       query: { id }
     })
   };
@@ -27,12 +27,12 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      {teamData &&
-        <Teams
+      {/* {teamData &&
+        <Brands
           teams = {teamData}
           renderTeamPage = {renderTeamPage}
         />
-      }
+      } */}
     </>
   )
 }
