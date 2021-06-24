@@ -57,8 +57,8 @@ const Navbar = () => {
           <Image
             src = "/shoe-logo.png"
             alt = "Shoe Brand"
-            width = {100}
-            height = {100}
+            width = {85}
+            height = {85}
           />
         </a>
         <ul className = "flex">

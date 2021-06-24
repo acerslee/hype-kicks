@@ -2,7 +2,8 @@ import Navbar from '../components/navbar';
 import Footer from '../components/footer';
 import Link from 'next/link';
 
-const LoginPage = () => {
+
+const SignUpPage = () => {
   return(
     <>
       <Navbar />
@@ -10,8 +11,8 @@ const LoginPage = () => {
         <div className = "container mx-auto">
           <div className = "max-w-md mx-auto my-10">
             <div className = "text-center">
-              <h1 className = "my-3 text-4xl font-semibold text-gray-600">Sign in</h1>
-              <p className = "text-gray-500">Please put in your login credentials below</p>
+              <h1 className = "my-3 text-4xl font-semibold text-gray-600">Sign Up</h1>
+              <p className = "text-gray-500">Enter your user credentials below!</p>
             </div>
             <div className = "m-7">
               <form action = "">
@@ -38,18 +39,36 @@ const LoginPage = () => {
                   <input
                     type = "password"
                     name = "password"
-                    className = "w-full px-3  py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700" />
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+                    title="Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters" required
+                    className = "w-full px-3  py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700"
+                  />
+                </div>
+                <div className = "mb-6">
+                  <label
+                    htmlFor = "confirm-password"
+                    className = "block mb-2 text-sm text-gray-600"
+                  >
+                    Confirm Password
+                  </label>
+                  <input
+                    type = "password"
+                    name = "password"
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+                    title="Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters" required
+                    className = "w-full px-3  py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700"
+                  />
                 </div>
                 <div className = "mb-6">
                   <button
                     type = "submit"
                     className = "w-full px-3 py-4 text-white bg-green-900 rounded-md focus:bg-green-300 focus:outline-none"
                   >
-                    Sign in
+                    Sign Up
                   </button>
                 </div>
-                <Link href = "/signup">
-                  <p className = "text-sm text-center text-gray-400 hover:text-purple-700 cursor-pointer" >Don't have an account yet? Sign up here</p>
+                <Link href = "/login">
+                  <p className = "text-sm text-center text-gray-400 hover:text-purple-700 cursor-pointer">Already have an account? Login here</p>
                 </Link>
               </form>
             </div>
@@ -61,4 +80,4 @@ const LoginPage = () => {
   )
 }
 
-export default LoginPage;
+export default SignUpPage;
