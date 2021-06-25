@@ -1,6 +1,6 @@
-import Navbar from '../components/navbar';
-import Footer from '../components/footer';
 import { useState, useEffect } from 'react';
+import Footer from '../components/footer';
+import Navbar from '../components/navbar';
 import axios from 'axios';
 
 interface Props{
