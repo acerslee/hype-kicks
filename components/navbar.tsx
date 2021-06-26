@@ -10,14 +10,14 @@ const Navbar = () => {
 
   const [brands, setBrands] = useState<(string|number)[]>([])
 
-  useEffect(() => {
-    axios
-      .get('/api/brands')
-      .then(({data}) => {
-        setBrands(data.results)
-      })
-      .catch(err => console.error(err))
-  }, [])
+  // useEffect(() => {
+  //   axios
+  //     .get('/api/brands')
+  //     .then(({data}) => {
+  //       setBrands(data.results)
+  //     })
+  //     .catch(err => console.error(err))
+  // }, [])
 
   const handleBrandRoute = (brand: any) => {
 
