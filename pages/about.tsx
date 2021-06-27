@@ -1,12 +1,14 @@
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
+import Image from 'next/image';
 
 const AboutPage = () => {
   return(
     <>
       <Navbar />
-      <div className = "w-3/4 flex flex-col justify-center mx-auto h-80v">
-        <h1 className = "font-bold text-5xl mb-5 border-b-4">About Us</h1>
+      <Image src = "/shoe-collection-crop.jpg" alt = "shoe collection" height = {400} width = {1400}/>
+      <div className = "w-3/4 flex flex-col justify-center mx-auto lg:h-40v sm:h-50v">
+        <h1 className = "font-bold text-5xl mb-5 border-b-4 sm: mt-6">About Us</h1>
         <section className = "mb-2 text-lg">
           Hype Kicks is a sneaker database where fellow sneakerheads can search for their favorite brands, and explore for their next addition to their collection. We make the best effort to provide users the most up-to-date sneaker data to keep up with trending and upcoming shoes. Come see all our selections here!
         </section>

@@ -51,7 +51,7 @@ const Navbar = () => {
             height = {85}
           />
         </a>
-        <ul className = "flex">
+        <ul className = "flex lg: mr-10">
           <li className = "toggleable hover:bg-green-900 hover:text-white">
             <input type="checkbox" value="selected" id="toggle-one" className="toggle-input" />
               <label htmlFor="toggle-one" className="block cursor-pointer py-6 px-4 lg:p-6 text-sm lg:text-base font-bold">Brands</label>
