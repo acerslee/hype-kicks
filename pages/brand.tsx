@@ -27,13 +27,21 @@ const Brandpage: React.FC<Props> = ({query}) => {
   }, [])
 
 
-  const renderNewList = (gender: string, year: number) => {
+  const renderNewList = (gender: string, year: string) => {
     console.log(gender, year)
     if (gender !== "none") {
       let results = shoeData.filter(shoe => shoe.gender === gender);
       setShoeData(results)
     }
 
+    if (year !== "none") {
+      axios
+        .post(`/api/shoes/${query.brand}`, {
+          year
+        })
+        .then(({data})=> setShoeData(data.results))
+        .catch(err => console.error('catch', err))
+    }
   };
 
   return(
