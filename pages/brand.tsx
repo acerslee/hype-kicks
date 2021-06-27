@@ -31,21 +31,24 @@ const Brandpage: React.FC<Props> = ({query}) => {
   }, [])
 
 
-  const renderNewList = (gender: string, year: string) => {
-    setShoeData(originalShoeData)
+  const renderNewList = async (gender: string, year: string) => {
+
+    if (gender !== "none" && year !== "none") {
+      const response = await axios.post(`/api/shoes/${query.brand}`, {year})
+      const shoeResults = await response.data.results;
+      const shoeResultFilter = await shoeResults.filter((shoe: {gender: string}) => shoe.gender === gender)
+      setShoeData(shoeResultFilter)
+      return
+    }
+
     if (gender !== "none") {
-      let results = shoeData.filter(shoe => shoe.gender === gender);
-      console.log(results)
+      let results = shoeData.filter((shoe: {gender: string}) => shoe.gender === gender);
       setShoeData(results)
     }
 
     if (year !== "none") {
-      axios
-        .post(`/api/shoes/${query.brand}`, {
-          year
-        })
-        .then(({data})=> setShoeData(data.results))
-        .catch(err => console.error('catch', err))
+      const response = await axios.post(`/api/shoes/${query.brand}`, {year})
+      setShoeData(response.data.results)
     }
   };
 
@@ -65,6 +68,8 @@ const Brandpage: React.FC<Props> = ({query}) => {
                 <p>Release Date: {shoe.releaseDate}</p>
                 <p>{shoe.colorway}</p>
                 <p>{shoe.title}</p>
+                {/* remove this line once you figure out the search filtering is working */}
+                <p>{shoe.gender}</p>
                 <p className = "mt-2">${shoe.retailPrice}</p>
               </div>
             </div>

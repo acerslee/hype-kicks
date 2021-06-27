@@ -28,7 +28,7 @@ const Search: React.FC<Props> = ({ renderNewList }) => {
       className = "flex justify-center items-center h-12 mb-7 text-xl space-x-8 bg-gray-100 p-10"
       onSubmit = {handleSubmit}>
       {/* <label htmlFor = "filter-gender">Gender</label> */}
-      <select className = "" id = "filter-gender" onChange = {handleGenderChange} defaultValue = {"none"}>
+      <select className = "text-xl p-3" id = "filter-gender" onChange = {handleGenderChange} defaultValue = {"none"}>
         <option value = "none">Select Gender</option>
         <option value = "child">Child</option>
         <option value = "infant">Infant</option>
@@ -40,7 +40,7 @@ const Search: React.FC<Props> = ({ renderNewList }) => {
       </select>
 
       {/* <label htmlFor = "filter-year">Year</label> */}
-      <select className = "text-xl " id = "filter-year" onChange = {handleYearChange} defaultValue = {"none"}>
+      <select className = "text-xl p-3" id = "filter-year" onChange = {handleYearChange} defaultValue = {"none"}>
         <option value = "none">Select Year</option>
         <option value = "2021">2021</option>
         <option value = "2020">2020</option>
