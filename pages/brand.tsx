@@ -12,6 +12,7 @@ interface Props{
 const Brandpage: React.FC<Props> = ({query}) => {
 
   const [ shoeData, setShoeData ] = useState<any>(null);
+  const [ originalShoeData, setOriginalShoeData] = useState<any>(null);
   const [ errorMessage, setErrorMessage ] = useState<boolean>(false)
 
   useEffect(() => {
@@ -21,16 +22,20 @@ const Brandpage: React.FC<Props> = ({query}) => {
         console.log(data)
         if (data.count === 0){
           setErrorMessage(true)
-        } else setShoeData(data.results)
+        } else {
+          setShoeData(data.results)
+          setOriginalShoeData(data.results)
+        }
       })
       .catch(err => console.error(err))
   }, [])
 
 
   const renderNewList = (gender: string, year: string) => {
-    console.log(gender, year)
+    setShoeData(originalShoeData)
     if (gender !== "none") {
       let results = shoeData.filter(shoe => shoe.gender === gender);
+      console.log(results)
       setShoeData(results)
     }
 
@@ -66,9 +71,11 @@ const Brandpage: React.FC<Props> = ({query}) => {
           ))}
         </div>
       }
-      {!errorMessage && !shoeData
-        ? <h1>Loading</h1>
-        : <p>Cannot find shoes</p>
+      {!errorMessage && !shoeData &&
+        <h1>Loading</h1>
+      }
+      {errorMessage &&
+        <p>Cannot find shoes</p>
       }
       <Footer />
     </>

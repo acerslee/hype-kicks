@@ -24,31 +24,36 @@ const Search: React.FC<Props> = ({ renderNewList }) => {
 
 
   return(
-    <form onSubmit = {handleSubmit}>
-      <label htmlFor = "filter-gender">
-        <select id = "filter-gender" onChange = {handleGenderChange} defaultValue = {"none"}>
-          <option value = "none">Select</option>
-          <option value = "child">Child</option>
-          <option value = "infant">Infant</option>
-          <option value = "preschool">Preschool</option>
-          <option value = "toddler">Toddler</option>
-          <option value = "unisex">Unisex</option>
-          <option value = "men">Men</option>
-          <option value = "women">Women</option>
-        </select>
-      </label>
+    <form
+      className = "flex justify-center items-center h-12 mb-7 text-xl space-x-8 bg-gray-100 p-10"
+      onSubmit = {handleSubmit}>
+      {/* <label htmlFor = "filter-gender">Gender</label> */}
+      <select className = "" id = "filter-gender" onChange = {handleGenderChange} defaultValue = {"none"}>
+        <option value = "none">Select Gender</option>
+        <option value = "child">Child</option>
+        <option value = "infant">Infant</option>
+        <option value = "preschool">Preschool</option>
+        <option value = "toddler">Toddler</option>
+        <option value = "unisex">Unisex</option>
+        <option value = "men">Men</option>
+        <option value = "women">Women</option>
+      </select>
 
-      <label htmlFor = "filter-year">
-        <select id = "filter-year" onChange = {handleYearChange} defaultValue = {"none"}>
-          <option value = "none">Select</option>
-          <option value = "2021">2021</option>
-          <option value = "2020">2020</option>
-          <option value = "2019">2019</option>
-          <option value = "2018">2018</option>
-          <option value = "2017">2017</option>
-        </select>
-      </label>
-      <input type = "submit" value = "Submit" />
+      {/* <label htmlFor = "filter-year">Year</label> */}
+      <select className = "text-xl " id = "filter-year" onChange = {handleYearChange} defaultValue = {"none"}>
+        <option value = "none">Select Year</option>
+        <option value = "2021">2021</option>
+        <option value = "2020">2020</option>
+        <option value = "2019">2019</option>
+        <option value = "2018">2018</option>
+        <option value = "2017">2017</option>
+      </select>
+
+      <input
+        className = "bg-green-900 text-white text-xl p-3"
+        type = "submit"
+        value = "Search"
+      />
     </form>
   )
 };
