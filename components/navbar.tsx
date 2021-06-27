@@ -1,26 +1,15 @@
-import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import axios from 'axios';
 
 const Navbar = () => {
 
   const router = useRouter();
 
-  const [brands, setBrands] = useState<(string|number)[]>([])
-
-  // useEffect(() => {
-  //   axios
-  //     .get('/api/brands')
-  //     .then(({data}) => {
-  //       setBrands(data.results)
-  //     })
-  //     .catch(err => console.error(err))
-  // }, [])
+  //there's an API route, but have to hard-code the brands to avoid API call limitation with current plan
+  const brands = ["ASICS", "ALEXANDER MCQUEEN", "BALENCIAGA", "BURBERRY", "CHANEL", "COMMON PROJECTS", "CONVERSE", "CROCS", "DIADORA", "DIOR", "GUCCI", "JORDAN", "LI-NING", "LOUIS VUITTON", "NEW BALANCE", "NIKE", "OFF-WHITE", "OTHER", "PRADA", "PUMA", "REEBOK", "SAINT LAURENT", "SAUCONY", "UNDER ARMOUR", "VANS", "VERSACE", "YEEZY", "ADIDAS"]
 
   const handleBrandRoute = (brand: any) => {
-
     let lowercaseBrand = brand.toLowerCase()
 
     router.push({
@@ -65,7 +54,7 @@ const Navbar = () => {
           <li className = "toggleable hover:bg-green-900 hover:text-white">
             <input type="checkbox" value="selected" id="toggle-one" className="toggle-input" />
               <label htmlFor="toggle-one" className="block cursor-pointer py-6 px-4 lg:p-6 text-sm lg:text-base font-bold">Brands</label>
-              <div role="toggle" className="p-6 mega-menu mb-16 sm:mb-0 shadow-xl bg-green-900">
+              <div role="toggle" className="p-6 mega-menu mb-16 sm:mb-0 shadow-xl bg-green-900 z-10">
                 <div className="container mx-auto w-full flex flex-wrap justify-between mx-2">
                   {renderMenuList(0, 7)}
                   {renderMenuList(7, 14)}
