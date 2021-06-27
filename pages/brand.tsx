@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Search from '../components/search';
 import Footer from '../components/footer';
 import Navbar from '../components/navbar';
 import axios from 'axios';
@@ -25,22 +26,41 @@ const Brandpage: React.FC<Props> = ({query}) => {
       .catch(err => console.error(err))
   }, [])
 
+
+  const renderNewList = (gender: string, year: number) => {
+    console.log(gender, year)
+    if (gender !== "none") {
+      let results = shoeData.filter(shoe => shoe.gender === gender);
+      setShoeData(results)
+    }
+
+  };
+
   return(
     <>
       <Navbar />
-      {!errorMessage && shoeData
-        ?
-        shoeData.map(shoe => (
-          <div key = {shoe.id}>
-            <p>{shoe.colorway}</p>
-            <p>{shoe.gender}</p>
-            {shoe.media.thumbUrl
-              ?  <Image src = {shoe.media.thumbUrl} height = {100} width = {100} alt = "shoe" />
-              :  <Image src = '/no-image.jpg' height = {100} width = {100} alt = "shoe" />
-            }
-          </div>
-        ))
-        : <p>Cannot find any shoes :/</p>
+      <Search renderNewList = {renderNewList}/>
+      {shoeData &&
+        <div className = "grid grid-cols-3 gap-3 w-4/5 bg">
+          {shoeData.map((shoe: any) => (
+            <div key = {shoe.id} className = "bg-gray-100 w-auto">
+              {shoe.media.imageUrl
+                ?  <Image src = {shoe.media.imageUrl} height = {300} width = {300} alt = "shoe" />
+                :  <Image src = '/no-image.jpg' height = {300} width = {300} alt = "shoe" />
+              }
+              <div className = "ml-3">
+                <p>Release Date: {shoe.releaseDate}</p>
+                <p>{shoe.colorway}</p>
+                <p>{shoe.title}</p>
+                <p className = "mt-2">${shoe.retailPrice}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      }
+      {!errorMessage && !shoeData
+        ? <h1>Loading</h1>
+        : <p>Cannot find shoes</p>
       }
       <Footer />
     </>
