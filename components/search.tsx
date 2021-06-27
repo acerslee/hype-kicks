@@ -6,11 +6,12 @@ interface Props{
 
 const Search: React.FC<Props> = ({ renderNewList }) => {
 
-  const [gender, setGender] = useState<string>("");
+  const [gender, setGender] = useState<string>("none");
   const [year, setYear] = useState<number>(2021)
 
   const handleSubmit = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault()
+    console.log(gender, year)
     renderNewList(gender, year)
   }
 

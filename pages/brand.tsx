@@ -11,8 +11,7 @@ interface Props{
 
 const Brandpage: React.FC<Props> = ({query}) => {
 
-  const [ shoeData, setShoeData ] = useState<any>(null);
-  const [ originalShoeData, setOriginalShoeData] = useState<any>(null);
+  const [ shoeData, setShoeData ] = useState<any>([]);
   const [ errorMessage, setErrorMessage ] = useState<boolean>(false)
 
   useEffect(() => {
@@ -24,16 +23,17 @@ const Brandpage: React.FC<Props> = ({query}) => {
           setErrorMessage(true)
         } else {
           setShoeData(data.results)
-          setOriginalShoeData(data.results)
         }
       })
       .catch(err => console.error(err))
-  }, [])
+  }, [query])
 
 
-  const renderNewList = async (gender: string, year: string) => {
+  const renderNewList = async (gender: string = "none", year: string = "none") => {
+    console.log(gender, year)
 
     if (gender !== "none" && year !== "none") {
+      console.log('is this running?')
       const response = await axios.post(`/api/shoes/${query.brand}`, {year})
       const shoeResults = await response.data.results;
       const shoeResultFilter = await shoeResults.filter((shoe: {gender: string}) => shoe.gender === gender)
@@ -47,6 +47,7 @@ const Brandpage: React.FC<Props> = ({query}) => {
     }
 
     if (year !== "none") {
+      console.log(year)
       const response = await axios.post(`/api/shoes/${query.brand}`, {year})
       setShoeData(response.data.results)
     }
@@ -56,7 +57,7 @@ const Brandpage: React.FC<Props> = ({query}) => {
     <>
       <Navbar />
       <Search renderNewList = {renderNewList}/>
-      {shoeData &&
+      {!errorMessage && shoeData &&
         <div className = "grid grid-cols-3 gap-3 w-4/5 bg">
           {shoeData.map((shoe: any) => (
             <div key = {shoe.id} className = "bg-gray-100 w-auto">
@@ -80,7 +81,7 @@ const Brandpage: React.FC<Props> = ({query}) => {
         <h1>Loading</h1>
       }
       {errorMessage &&
-        <p>Cannot find shoes</p>
+        <p className = "h-4/5 text-center">Sorry, no shoes available at the moment!</p>
       }
       <Footer />
     </>
