@@ -1,7 +1,7 @@
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
 
-export default function Home() {
+const Home = () => {
   return (
     <>
       <Navbar />
@@ -9,3 +9,5 @@ export default function Home() {
     </>
   )
 }
+
+export default Home;

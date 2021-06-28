@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { FaBars } from 'react-icons/fa';
+// import { FaBars } from 'react-icons/fa';
 
 const Navbar = () => {
 
@@ -10,7 +10,7 @@ const Navbar = () => {
   //there's an API route, but have to hard-code the brands to avoid API call limitation with current plan
   const brands = ["ASICS", "ALEXANDER MCQUEEN", "BALENCIAGA", "BURBERRY", "CHANEL", "COMMON PROJECTS", "CONVERSE", "CROCS", "DIADORA", "DIOR", "GUCCI", "JORDAN", "LI-NING", "LOUIS VUITTON", "NEW BALANCE", "NIKE", "OFF-WHITE", "OTHER", "PRADA", "PUMA", "REEBOK", "SAINT LAURENT", "SAUCONY", "UNDER ARMOUR", "VANS", "VERSACE", "YEEZY", "ADIDAS"]
 
-  const handleBrandRoute = (brand: any) => {
+  const handleBrandRoute = (brand: string) => {
     let lowercaseBrand = brand.toLowerCase()
 
     router.push({
@@ -20,22 +20,19 @@ const Navbar = () => {
   };
 
   const renderMenuList = (indexOne: number, indexTwo: number) => {
+    let menuList = brands.slice(indexOne, indexTwo);
+
     return(
       <ul className="px-4 w-full sm:w-1/2 lg:w-1/4 border-gray-600 border-b sm:border-r lg:border-b-0 pb-6 pt-6 lg:pt-3">
-        {brands.map((brand: (string|number), index: number) => {
-          if (index >= indexOne && index < indexTwo){
-            return(
-              <li key = {index}>
-                <p
-                  className="block p-3 hover:bg-blue-600 text-gray-300 hover:text-white"
-                  onClick = {() => handleBrandRoute(brand)}
-                >
-                  {brand}
-                </p>
-              </li>
-            )
-          }
-        })}
+        {menuList.map((brand: string, index: number) => (
+          <li
+            key = {index}
+            className="block p-3 hover:bg-blue-600 text-gray-300 hover:text-white cursor-pointer"
+            onClick = {() => handleBrandRoute(brand)}
+          >
+            {brand}
+          </li>
+        ))}
       </ul>
     )
   };
@@ -65,10 +62,10 @@ const Navbar = () => {
               </div>
           </li>
           <Link href = '/about'>
-            <li className = "relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold hover:bg-green-900 hover:text-white">About</li>
+            <li className = "relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold hover:bg-green-900 hover:text-white cursor-pointer">About</li>
           </Link>
           <Link href = '/login'>
-            <li className = "relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold hover:bg-green-900 hover:text-white">Login</li>
+            <li className = "relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold hover:bg-green-900 hover:text-white cursor-pointer">Login</li>
           </Link>
         </ul>
       </div>

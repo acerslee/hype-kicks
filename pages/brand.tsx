@@ -5,8 +5,12 @@ import Navbar from '../components/navbar';
 import axios from 'axios';
 import Image from 'next/image';
 
+interface Query{
+  brand: string
+}
+
 interface Props{
-  query: object
+  query: Query
 }
 
 const Brandpage: React.FC<Props> = ({query}) => {
@@ -18,7 +22,6 @@ const Brandpage: React.FC<Props> = ({query}) => {
     axios
       .get(`/api/shoes/${query.brand}`)
       .then(({data}) => {
-        console.log(data)
         if (data.count === 0){
           setErrorMessage(true)
         } else {
@@ -30,10 +33,7 @@ const Brandpage: React.FC<Props> = ({query}) => {
 
 
   const renderNewList = async (gender: string = "none", year: string = "none") => {
-    console.log(gender, year)
-
     if (gender !== "none" && year !== "none") {
-      console.log('is this running?')
       const response = await axios.post(`/api/shoes/${query.brand}`, {year})
       const shoeResults = await response.data.results;
       const shoeResultFilter = await shoeResults.filter((shoe: {gender: string}) => shoe.gender === gender)
@@ -42,12 +42,11 @@ const Brandpage: React.FC<Props> = ({query}) => {
     }
 
     if (gender !== "none") {
-      let results = shoeData.filter((shoe: {gender: string}) => shoe.gender === gender);
+      const results = shoeData.filter((shoe: {gender: string}) => shoe.gender === gender);
       setShoeData(results)
     }
 
     if (year !== "none") {
-      console.log(year)
       const response = await axios.post(`/api/shoes/${query.brand}`, {year})
       setShoeData(response.data.results)
     }
@@ -78,7 +77,7 @@ const Brandpage: React.FC<Props> = ({query}) => {
         </div>
       }
       {!errorMessage && !shoeData &&
-        <h1>Loading</h1>
+        <p className = "h-4/5 text-center">Loading</p>
       }
       {errorMessage &&
         <p className = "h-4/5 text-center">Sorry, no shoes available at the moment!</p>
