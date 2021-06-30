@@ -57,7 +57,7 @@ const Brandpage: React.FC<Props> = ({query}) => {
       <Navbar />
       <Search renderNewList = {renderNewList}/>
       {!errorMessage && shoeData &&
-        <div className = "grid grid-cols-3 gap-7 w-4/5 bg mx-auto lg:grid-cols-4 md:gap-5">
+        <div className = "grid grid-cols-2 gap-7 w-11/12 mb-4 mx-auto lg:grid-cols-4 md:grid-cols-3 md:gap-5">
           {shoeData.map((shoe: any) => (
             <div key = {shoe.id} className = "bg-gray-100">
               {shoe.media.imageUrl
@@ -66,10 +66,9 @@ const Brandpage: React.FC<Props> = ({query}) => {
               }
               <div className = "ml-3">
                 <p>Release Date: {shoe.releaseDate}</p>
-                <p>{shoe.colorway}</p>
                 <p>{shoe.title}</p>
-                {/* remove this line once you figure out the search filtering is working */}
-                <p>{shoe.gender}</p>
+                <p className = "text-gray-500">{shoe.colorway}</p>
+                <p className = "text-gray-500">{shoe.gender}</p>
                 {/*  */}
                 <p className = "mt-2">${shoe.retailPrice}</p>
               </div>
