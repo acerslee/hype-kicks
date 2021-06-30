@@ -59,11 +59,23 @@ const Brandpage: React.FC<Props> = ({query}) => {
       {!errorMessage && shoeData &&
         <div className = "grid grid-cols-2 gap-7 w-11/12 mb-4 mx-auto lg:grid-cols-4 md:grid-cols-3 md:gap-5">
           {shoeData.map((shoe: any) => (
-            <div key = {shoe.id} className = "bg-gray-100">
-              {shoe.media.imageUrl
-                ?  <Image src = {shoe.media.imageUrl} height = {500} width = {500} alt = "shoe" />
-                :  <Image src = '/no-image.jpg' height = {500} width = {500} alt = "shoe" />
-              }
+            <div key = {shoe.id} className = "bg-gray-50">
+              <div className = "relative h-30v">
+                {shoe.media.imageUrl
+                  ?  <Image
+                        src = {shoe.media.imageUrl}
+                        layout = 'fill'
+                        objectFit = 'cover'
+                        alt = "shoe"
+                      />
+                  :  <Image
+                        src = '/no-image.jpg'
+                        layout = 'fill'
+                        objectFit = 'cover'
+                        alt = "shoe"
+                      />
+                }
+              </div>
               <div className = "ml-3">
                 <p>Release Date: {shoe.releaseDate}</p>
                 <p>{shoe.title}</p>

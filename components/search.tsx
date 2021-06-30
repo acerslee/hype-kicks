@@ -4,6 +4,8 @@ interface Props{
   renderNewList: Function
 }
 
+
+
 const Search: React.FC<Props> = ({ renderNewList }) => {
 
   const [gender, setGender] = useState<string>("none");
@@ -16,6 +18,7 @@ const Search: React.FC<Props> = ({ renderNewList }) => {
   }
 
   const handleGenderChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+
     setGender(e.target.value)
   };
 
