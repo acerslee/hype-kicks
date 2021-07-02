@@ -28,7 +28,7 @@ const Home = () => {
         </div>
         <h1 className = "absolute inset-0 m-auto text-orange-main-page text-xl h-0 w-0 font-bold lg:text-6xl">Explore Your Next Addition To Your Collection.</h1>
         <section>
-          <h1 className = "text-sm text-gray-600 lg:text-3xl md: text-base">Today's Releases</h1>
+          <h1 className = "text-lg text-gray-600 text-center lg:text-3xl lg:text-left lg:ml-8 md:text-base">Today's Releases</h1>
           <div className = "grid grid-cols-2 gap-2 mx-auto lg:grid-cols-5 md:grid-cols-3 md:gap-5">
             {newestSet.slice(0,5).map((shoe: any) => (
               <div key = {shoe.id} className = "bg-gray-50">
@@ -59,7 +59,7 @@ const Home = () => {
             ))}
             </div>
             <Link href = '/newest'>
-              <a className = "text-right hover:text-blue-600 cursor-pointer">SEE MORE</a>
+              <p className = "text-right text-gray-500 mr-4 hover:text-blue-600 cursor-pointer">SEE MORE</p>
             </Link>
         </section>
       </main>
