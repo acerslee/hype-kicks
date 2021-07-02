@@ -16,6 +16,9 @@ module.exports = {
         "90v": "90vh",
         "100v": "100vh"
 		  },
+      textColor: {
+        'orange-main-page': '#ffa20a'
+      }
     },
   },
   variants: {

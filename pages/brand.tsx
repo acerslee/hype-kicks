@@ -81,7 +81,6 @@ const Brandpage: React.FC<Props> = ({query}) => {
                 <p>{shoe.title}</p>
                 <p className = "text-gray-500">{shoe.colorway}</p>
                 <p className = "text-gray-500">{shoe.gender}</p>
-                {/*  */}
                 <p className = "mt-2">${shoe.retailPrice}</p>
               </div>
             </div>
