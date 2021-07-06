@@ -4,14 +4,12 @@ interface Props{
   renderNewList: Function
 }
 
-
-
 const Search: React.FC<Props> = ({ renderNewList }) => {
 
   const [gender, setGender] = useState<string>("none");
   const [year, setYear] = useState<string>("2021")
 
-  const handleSubmit = (e: React.FormEventHandler<HTMLInputElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     renderNewList(gender, year)
   }
