@@ -11,7 +11,7 @@ const Search: React.FC<Props> = ({ renderNewList }) => {
   const [gender, setGender] = useState<string>("none");
   const [year, setYear] = useState<string>("2021")
 
-  const handleSubmit = (e: React.FormEvent<HTMLInputElement>) => {
+  const handleSubmit = (e: React.FormEventHandler<HTMLInputElement>) => {
     e.preventDefault()
     renderNewList(gender, year)
   }
