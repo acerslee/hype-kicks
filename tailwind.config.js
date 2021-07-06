@@ -18,6 +18,11 @@ module.exports = {
 		  },
       textColor: {
         'orange-main-page': '#ffa20a'
+      },
+      screens: {
+        'phone': '740px',
+        'laptop': '1024px',
+        'desktop': '1280px'
       }
     },
   },

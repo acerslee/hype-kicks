@@ -13,12 +13,10 @@ const Search: React.FC<Props> = ({ renderNewList }) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault()
-    console.log(gender, year)
     renderNewList(gender, year)
   }
 
   const handleGenderChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-
     setGender(e.target.value)
   };
 
@@ -29,10 +27,9 @@ const Search: React.FC<Props> = ({ renderNewList }) => {
 
   return(
     <form
-      className = "flex justify-center items-center h-12 mb-7 text-xl space-x-8 bg-gray-100 p-10"
+      className = "flex justify-center items-center h-auto text-xl space-x-8 bg-gray-100 p-6 phone:flex-col laptop:h-12v"
       onSubmit = {handleSubmit}>
-      {/* <label htmlFor = "filter-gender">Gender</label> */}
-      <select className = "text-xl p-3" id = "filter-gender" onChange = {handleGenderChange} defaultValue = {"none"}>
+      <select className = "text-xl p-3 phone:w-full" id = "filter-gender" onChange = {handleGenderChange} defaultValue = {"none"}>
         <option value = "none">Select Gender</option>
         <option value = "child">Child</option>
         <option value = "infant">Infant</option>
@@ -43,7 +40,6 @@ const Search: React.FC<Props> = ({ renderNewList }) => {
         <option value = "women">Women</option>
       </select>
 
-      {/* <label htmlFor = "filter-year">Year</label> */}
       <select className = "text-xl p-3" id = "filter-year" onChange = {handleYearChange} defaultValue = {"none"}>
         <option value = "none">Select Year</option>
         <option value = "2021">2021</option>
