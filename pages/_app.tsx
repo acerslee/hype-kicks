@@ -1,12 +1,17 @@
 // import 'tailwindcss/tailwind.css'
 import '../styles.css';
-// import type { AppProps } from 'next/app';
+// import type { AppProps as NextAppProps} from 'next/app';
 import Head from 'next/head';
 import App from 'next/app'
 
+type AppProps<P = any> = {
+  Component: P;
+  ctx: P;
+};
+
 class MyApp extends App {
-  static async getInitialProps({ Component, ctx }) {
-    let pageProps = {};
+  static async getInitialProps({ Component, ctx }: AppProps) {
+    let pageProps = {query: null};
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
     }
