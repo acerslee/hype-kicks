@@ -18,8 +18,8 @@ const NewestShoes = () => {
   return(
     <>
       <Navbar />
-      <h1 className = "text-lg text-gray-600 text-center mt-4 lg:text-3xl">Today's Releases</h1>
-      <div className = "grid grid-cols-1 gap-7 w-11/12 mb-4 mx-auto lg:grid-cols-4 md:grid-cols-3 md:gap-5">
+      <h1 className = "text-4xl text-gray-600 text-center mt-4 desktop:text-3xl">Today's Releases</h1>
+      <div className = "grid grid-cols-1 gap-7 w-11/12 mb-4 mx-auto desktop:grid-cols-4 laptop:grid-cols-3 laptop:gap-5">
             {newestSet.map((shoe: any) => (
               <div key = {shoe.id} className = "bg-gray-50">
                 <div className = "relative h-30v">

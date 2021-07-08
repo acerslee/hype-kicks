@@ -1,4 +1,3 @@
-// import 'tailwindcss/tailwind.css'
 import '../styles/globals.css';
 // import type { AppProps as NextAppProps} from 'next/app';
 import Head from 'next/head';
@@ -10,10 +9,10 @@ type AppProps<P = any> = {
 };
 
 class MyApp extends App {
-  static async getStaticProps({ Component, ctx }: AppProps) {
+  static async getInitialProps({ Component, ctx }: AppProps) {
     let pageProps = {query: null};
-    if (Component.getStaticProps) {
-      pageProps = await Component.getStaticProps(ctx);
+    if (Component.getInitialProps) {
+      pageProps = await Component.getInitialProps(ctx);
     }
     // exposes the query to the user
     pageProps.query = ctx.query;
