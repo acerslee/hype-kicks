@@ -1,5 +1,5 @@
-// import 'tailwindcss/tailwind.css'
-import '../styles.css';
+import 'tailwindcss/tailwind.css'
+import '../styles/globals.css';
 // import type { AppProps as NextAppProps} from 'next/app';
 import Head from 'next/head';
 import App from 'next/app'
