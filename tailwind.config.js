@@ -1,6 +1,11 @@
+
+
 module.exports = {
   mode: 'jit',
-  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
+  purge: [
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
+  ],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
@@ -18,6 +23,9 @@ module.exports = {
 		  },
       textColor: {
         'orange-main-page': '#ffa20a'
+      },
+      inset:{
+        "55/100": "55%"
       },
       screens: {
         'phone': '740px',
