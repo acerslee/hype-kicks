@@ -30,7 +30,7 @@ const Home = () => {
           <section id = "newest-shoes">
             <h1 className = "text-lg text-gray-600 text-center lg:text-3xl lg:text-left lg:ml-2 md:text-base">Today's Releases</h1>
             <div className = "grid grid-cols-2 gap-2 mx-auto lg:grid-cols-5 md:grid-cols-3 md:gap-5">
-              {newestSet.slice(5).map((shoe: any) => (
+              {newestSet.slice(0,5).map((shoe: any) => (
                 <div key = {shoe.id} className = "bg-gray-50 text-left">
                   <div className = "relative h-20v">
                       {shoe.media.imageUrl

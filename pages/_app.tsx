@@ -10,10 +10,10 @@ type AppProps<P = any> = {
 };
 
 class MyApp extends App {
-  static async getInitialProps({ Component, ctx }: AppProps) {
+  static async getStaticProps({ Component, ctx }: AppProps) {
     let pageProps = {query: null};
-    if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx);
+    if (Component.getStaticProps) {
+      pageProps = await Component.getStaticProps(ctx);
     }
     // exposes the query to the user
     pageProps.query = ctx.query;
