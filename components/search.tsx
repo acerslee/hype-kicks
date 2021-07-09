@@ -25,9 +25,9 @@ const Search: React.FC<Props> = ({ renderNewList }) => {
 
   return(
     <form
-      className = "flex justify-center items-center h-auto text-xl space-x-8 bg-gray-100 p-6 phone:flex-col laptop:h-12v"
+      className = "flex justify-center items-center h-auto text-xl space-x-8 bg-gray-100 p-6  laptop:h-12v"
       onSubmit = {handleSubmit}>
-      <select className = "text-xl p-3 phone:w-full" id = "filter-gender" onChange = {handleGenderChange} defaultValue = {"none"}>
+      <select className = "text-xl p-3" id = "filter-gender" onChange = {handleGenderChange} defaultValue = {"none"}>
         <option value = "none">Select Gender</option>
         <option value = "child">Child</option>
         <option value = "infant">Infant</option>

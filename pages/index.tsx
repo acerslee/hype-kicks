@@ -25,7 +25,7 @@ const Home = () => {
         <div className = "relative h-60v laptop:h-90v ">
           <Image src ="/main-page-shoe.jpg" alt = "main page shoe" layout = 'fill' objectFit = 'cover' />
         </div>
-        <div className = "absolute bottom-1/2 left-2/4 transform -translate-x-2/4 -translate-y-2/4 text-orange-main-page text-3xl font-bold laptop:text-6xl laptop:top-2/4 laptop:bottom-0 ">Explore Your Next Addition.</div>
+        <div className = "absolute bottom-55/100 left-2/4 transform -translate-x-2/4 -translate-y-2/4 text-orange-main-page text-3xl font-bold laptop:text-6xl laptop:top-2/4 laptop:bottom-1/2 ">Explore Your Next Addition.</div>
         {newestSet.length !== 0 &&
           <section id = "newest-shoes">
             <h1 className = "text-4xl text-gray-600 text-center mb-4 desktop:text-3xl desktop:text-left desktop:ml-2">Today's Releases</h1>
