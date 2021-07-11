@@ -75,7 +75,7 @@ const Brandpage: React.FC<Props> = ({query}) => {
       <Navbar />
       <Search renderNewList = {renderNewList}/>
       {shoeData.length > 0 &&
-        <div className = "grid grid-cols-1 gap-7 w-11/12 mb-4 mx-auto desktop:grid-cols-4 laptop:grid-cols-2 laptop:gap-4">
+        <div className = "grid grid-cols-1 gap-7 w-11/12 mb-4 mx-auto laptop:grid-cols-2 laptop:gap-4 desktop:grid-cols-4 ">
           {shoeData.map((shoe: any) => (
             <div key = {shoe.id} className = "bg-gray-50">
               <div className = "relative h-30v">
@@ -107,7 +107,9 @@ const Brandpage: React.FC<Props> = ({query}) => {
       }
 
       {errorMessage &&
-        <p className = "h-4/5 text-center">Sorry, no shoes available at the moment!</p>
+        <div className = "h-80v flex justify-center items-center">
+          <p className = "text-xl laptop:text-2xl desktop:text-4xl">Sorry, no shoes available at the moment!</p>
+        </div>
       }
       <Footer />
     </>

@@ -29,11 +29,11 @@
   display: none;
 }
 
-.toggle-input:not(checked) ~ .mega-menu {
+.toggle-input:not(checked) ~ .mega-menu, .menu-item {
   display: none;
 }
 
-.toggle-input:checked ~ .mega-menu {
+.toggle-input:checked ~ .mega-menu, .menu-item {
   display: block;
 }
 

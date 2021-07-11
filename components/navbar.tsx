@@ -27,7 +27,8 @@ const Navbar = () => {
         {menuList.map((brand: string, index: number) => (
           <li
             key = {index}
-            className="block p-3 hover:bg-blue-600 text-gray-300 hover:text-white cursor-pointer"
+            role = "toggle"
+            className="block p-3 hover:bg-blue-600 text-gray-300 hover:text-white cursor-pointer menu-item"
             onClick = {() => handleBrandRoute(brand)}
           >
             {brand}
