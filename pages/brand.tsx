@@ -4,6 +4,7 @@ import Footer from '../components/footer';
 import Navbar from '../components/navbar';
 import axios from 'axios';
 import Image from 'next/image';
+import { window } from 'browser-monads';
 
 interface Query{
   brand: string
@@ -19,7 +20,8 @@ const Brandpage: React.FC<Props> = ({query}) => {
   const [ errorMessage, setErrorMessage ] = useState<boolean>(false)
 
   //for mobile view only
-  const [itemsToShow, setItemsToShow] = useState<number>(10);
+  const [ itemsToShow, setItemsToShow ] = useState<number>(10);
+  const [ mobileData, setMobileData ] = useState<any>([]);
 
   useEffect(() => {
     axios
@@ -30,45 +32,54 @@ const Brandpage: React.FC<Props> = ({query}) => {
         } else {
           setErrorMessage(false)
           setShoeData(data.results)
+          if (window.screen.width < 750) {
+            setMobileData(data.results)
+          }
         }
       })
+
       .catch(err => console.error(err))
   }, [query.brand])
 
   const renderNewList = async (gender: string = "none", year: string = "none") => {
-    if (gender !== "none" && year !== "none") {
-      const response = await axios.post(`/api/shoes/${query.brand}`, {year})
-      const shoeResults = await response.data.results;
-      const shoeResultFilter = await shoeResults.filter((shoe: {gender: string}) => shoe.gender === gender)
-      setShoeData(shoeResultFilter)
-      return
-    }
+    try{
+      if (gender !== "none" && year !== "none") {
+        const response = await axios.post(`/api/shoes/${query.brand}`, {year})
+        const shoeResults = await response.data.results;
+        const shoeResultFilter = await shoeResults.filter((shoe: {gender: string}) => shoe.gender === gender)
+        setShoeData(shoeResultFilter)
+        return
+      }
 
-    if (gender !== "none") {
-      const results = shoeData.filter((shoe: {gender: string}) => shoe.gender === gender);
-      setShoeData(results)
-    }
+      if (gender !== "none") {
+        const results = shoeData.filter((shoe: {gender: string}) => shoe.gender === gender);
+        setShoeData(results)
+      }
 
-    if (year !== "none") {
-      const response = await axios.post(`/api/shoes/${query.brand}`, {year})
-      setShoeData(response.data.results)
+      if (year !== "none") {
+        const response = await axios.post(`/api/shoes/${query.brand}`, {year})
+        setShoeData(response.data.results)
+      }
+    } catch(err){
+      console.error("Issue with API call", err)
     }
   };
 
   //for mobile view only
-  // const showMoreLoader = () => {
-  //   setShoeData(shoeData.slice(0, itemsToShow + 10))
-  //   setItemsToShow(itemsToShow + 10)
-  // };
+  const showMoreLoader = () => {
+    setShoeData(mobileData.slice(0, itemsToShow + 10))
+    setItemsToShow(itemsToShow + 10)
+  };
 
-  // useEffect(() => {
-  //   if (window.screen.width < 750) {
-  //     let slicedShoeData = shoeData.slice(0,10)
-  //     setShoeData(slicedShoeData)
-  //     setItemsToShow(10)
-  //   }
-  // }, [shoeData])
-
+  useEffect(() => {
+    if (window.screen.width < 750) {
+      console.log(mobileData)
+      let slicedShoeData = mobileData.slice(0,10)
+      setShoeData(slicedShoeData)
+      setItemsToShow(10)
+    }
+  }, [mobileData])
+  //
 
   return(
     <>
@@ -104,6 +115,14 @@ const Brandpage: React.FC<Props> = ({query}) => {
             </div>
           ))}
         </div>
+      }
+      {window.screen.width < 750 && !errorMessage &&
+        <>
+          {itemsToShow >= mobileData.length
+            ? <p className = "text-center mb-2">No more items to show.</p>
+            : <p className = "text-center mb-2" onClick = {() => showMoreLoader()}>Click here to load more items</p>
+          }
+        </>
       }
 
       {errorMessage &&
