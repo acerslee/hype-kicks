@@ -2,14 +2,14 @@ import { useContext } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import AuthContext from '../stores/authContext';
+import AuthContext from '../netlify/authContext';
 // import { FaBars } from 'react-icons/fa';
 
 const Navbar = () => {
 
   const router = useRouter();
-  const { user, login, logout } = useContext(AuthContext);
-  console.log(user)
+  const { user, login, logout, authReady } = useContext(AuthContext);
+
   //there's an API route, but have to hard-code the brands to avoid API call limitation with current plan
   const brands = ["ASICS", "ALEXANDER MCQUEEN", "BALENCIAGA", "BURBERRY", "CHANEL", "COMMON PROJECTS", "CONVERSE", "CROCS", "DIADORA", "DIOR", "GUCCI", "JORDAN", "LI-NING", "LOUIS VUITTON", "NEW BALANCE", "NIKE", "OFF-WHITE", "OTHER", "PRADA", "PUMA", "REEBOK", "SAINT LAURENT", "SAUCONY", "UNDER ARMOUR", "VANS", "VERSACE", "YEEZY", "ADIDAS"]
 
@@ -52,34 +52,35 @@ const Navbar = () => {
             height = {85}
           />
         </a>
-        <ul className = "flex lg: mr-10">
-          {user &&
-            <li className = "relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold">
-              Hello {user.user_metadata.full_name}
-            </li>
-          }
-          <li className = "toggleable hover:bg-green-900 hover:text-white">
-            <input type="checkbox" value="selected" id="toggle-one" className="toggle-input" />
-              <label htmlFor="toggle-one" className="block cursor-pointer py-6 px-4 lg:p-6 text-sm lg:text-base font-bold">Brands</label>
-              <div role="toggle" className="p-6 mega-menu mb-16 sm:mb-0 shadow-xl bg-green-900 z-10">
-                <div className="container mx-auto w-full flex flex-wrap justify-between mx-2">
-                  {renderMenuList(0, 7)}
-                  {renderMenuList(7, 14)}
-                  {renderMenuList(14, 21)}
-                  {renderMenuList(21, 28)}
+        {authReady &&
+          <ul className = "flex lg: mr-10">
+            {user &&
+              <li className = "relative block py-6 px-2 lg:p-6 text-sm lg:text-base">
+                Hello {user.user_metadata.full_name}
+              </li>
+            }
+            <li className = "toggleable hover:bg-green-900 hover:text-white">
+              <input type="checkbox" value="selected" id="toggle-one" className="toggle-input" />
+                <label htmlFor="toggle-one" className="block cursor-pointer py-6 px-4 lg:p-6 text-sm lg:text-base font-bold">Brands</label>
+                <div role="toggle" className="p-6 mega-menu mb-16 sm:mb-0 shadow-xl bg-green-900 z-10">
+                  <div className="container mx-auto w-full flex flex-wrap justify-between mx-2">
+                    {renderMenuList(0, 7)}
+                    {renderMenuList(7, 14)}
+                    {renderMenuList(14, 21)}
+                    {renderMenuList(21, 28)}
+                  </div>
                 </div>
-              </div>
-          </li>
-          <Link href = '/about'>
-            <li className = "relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold hover:bg-green-900 hover:text-white cursor-pointer">About</li>
-          </Link>
-          {/* <Link href = '/login'> */}
-          {!user
-            ? <li className = "relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold hover:bg-green-900 hover:text-white cursor-pointer" onClick = {login}>Login</li>
-            : <li className = "relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold hover:bg-green-900 hover:text-white cursor-pointer" onClick = {logout}>Logout</li>
-          }
-          {/* </Link> */}
-        </ul>
+            </li>
+            <Link href = '/about'>
+              <li className = "relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold hover:bg-green-900 hover:text-white cursor-pointer">About</li>
+            </Link>
+            {!user
+              ? <li className = "relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold hover:bg-green-900 hover:text-white cursor-pointer" onClick = {login}>Login</li>
+              :
+              <li className = "relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold hover:bg-green-900 hover:text-white cursor-pointer" onClick = {logout}>Logout</li>
+            }
+          </ul>
+        }
       </nav>
     </header>
   )
