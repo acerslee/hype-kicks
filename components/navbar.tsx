@@ -1,12 +1,15 @@
+import { useContext } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import AuthContext from '../stores/authContext';
 // import { FaBars } from 'react-icons/fa';
 
 const Navbar = () => {
 
   const router = useRouter();
-
+  const { user, login, logout } = useContext(AuthContext);
+  console.log(user)
   //there's an API route, but have to hard-code the brands to avoid API call limitation with current plan
   const brands = ["ASICS", "ALEXANDER MCQUEEN", "BALENCIAGA", "BURBERRY", "CHANEL", "COMMON PROJECTS", "CONVERSE", "CROCS", "DIADORA", "DIOR", "GUCCI", "JORDAN", "LI-NING", "LOUIS VUITTON", "NEW BALANCE", "NIKE", "OFF-WHITE", "OTHER", "PRADA", "PUMA", "REEBOK", "SAINT LAURENT", "SAUCONY", "UNDER ARMOUR", "VANS", "VERSACE", "YEEZY", "ADIDAS"]
 
@@ -39,8 +42,8 @@ const Navbar = () => {
   };
 
   return(
-    <nav className="relative bg-white border-b-2 border-gray-300 text-gray-900">
-      <div className="container mx-auto flex  justify-between">
+    <header className="relative bg-white border-b-2 border-gray-300 text-gray-900">
+      <nav className="container mx-auto flex  justify-between">
         <a href = "/">
           <Image
             src = "/shoe-logo.png"
@@ -50,6 +53,11 @@ const Navbar = () => {
           />
         </a>
         <ul className = "flex lg: mr-10">
+          {user &&
+            <li className = "relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold">
+              Hello {user.user_metadata.full_name}
+            </li>
+          }
           <li className = "toggleable hover:bg-green-900 hover:text-white">
             <input type="checkbox" value="selected" id="toggle-one" className="toggle-input" />
               <label htmlFor="toggle-one" className="block cursor-pointer py-6 px-4 lg:p-6 text-sm lg:text-base font-bold">Brands</label>
@@ -65,12 +73,15 @@ const Navbar = () => {
           <Link href = '/about'>
             <li className = "relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold hover:bg-green-900 hover:text-white cursor-pointer">About</li>
           </Link>
-          <Link href = '/login'>
-            <li className = "relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold hover:bg-green-900 hover:text-white cursor-pointer">Login</li>
-          </Link>
+          {/* <Link href = '/login'> */}
+          {!user
+            ? <li className = "relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold hover:bg-green-900 hover:text-white cursor-pointer" onClick = {login}>Login</li>
+            : <li className = "relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold hover:bg-green-900 hover:text-white cursor-pointer" onClick = {logout}>Logout</li>
+          }
+          {/* </Link> */}
         </ul>
-      </div>
-    </nav>
+      </nav>
+    </header>
   )
 };
 

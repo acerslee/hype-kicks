@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
 import Search from '../components/search';
-import Footer from '../components/footer';
-import Navbar from '../components/navbar';
 import axios from 'axios';
 import Image from 'next/image';
 import { window } from 'browser-monads';
@@ -43,6 +41,8 @@ const Brandpage: React.FC<Props> = ({query}) => {
 
   const renderNewList = async (gender: string = "none", year: string = "none") => {
     try{
+      setItemsToShow(10)
+
       if (gender !== "none" && year !== "none") {
         const response = await axios.post(`/api/shoes/${query.brand}`, {year})
         const shoeResults = await response.data.results;
@@ -83,7 +83,6 @@ const Brandpage: React.FC<Props> = ({query}) => {
 
   return(
     <>
-      <Navbar />
       <Search renderNewList = {renderNewList}/>
       {shoeData.length > 0 &&
         <div className = "grid grid-cols-1 gap-7 w-11/12 mb-4 mx-auto laptop:grid-cols-2 laptop:gap-4 desktop:grid-cols-4 ">
@@ -124,13 +123,11 @@ const Brandpage: React.FC<Props> = ({query}) => {
           }
         </>
       }
-
       {errorMessage &&
         <div className = "h-80v flex justify-center items-center">
           <p className = "text-xl laptop:text-2xl desktop:text-4xl">Sorry, no shoes available at the moment!</p>
         </div>
       }
-      <Footer />
     </>
   )
 }

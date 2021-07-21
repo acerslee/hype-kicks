@@ -23,7 +23,7 @@ module.exports = {
         'orange-main-page': '#ffa20a'
       },
       inset:{
-        "55/100": "55%"
+        "45/100": "45%"
       },
       screens: {
         'phone': '740px',
