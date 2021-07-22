@@ -1,4 +1,4 @@
-exports.handler = async () => {
+{/* exports.handler = async () => {
   console.log('function ran');
 
   const data = { name: "Alex"}
@@ -8,3 +8,5 @@ exports.handler = async () => {
     body: JSON.stringify(data)
   }
 };
+
+/*}
