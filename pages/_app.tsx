@@ -22,7 +22,6 @@ class MyApp extends App {
 
   render() {
     const { Component, pageProps } = this.props;
-    console.log(this.props)
     return(
       <AuthContextProvider>
         <SEO path = {this.props.router.asPath}/>

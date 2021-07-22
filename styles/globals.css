@@ -17,7 +17,23 @@
   width: 100%;
 }
 
-.toggleable > label:after {
+.hoverable {
+  position: static;
+}
+
+.hoverable > a:after {
+  content: "\25BC";
+  font-size: 10px;
+  padding-left: 6px;
+  position: relative;
+  top: -1px;
+}
+
+.hoverable:hover .mega-menu {
+  display: block;
+}
+
+/* .toggleable > label:after {
   content: "\25BC";
   font-size: 10px;
   padding-left: 6px;
@@ -29,11 +45,11 @@
   display: none;
 }
 
-.toggle-input:not(checked) ~ .mega-menu, .menu-item {
+.toggle-input:not(checked) ~ .mega-menu {
   display: none;
 }
 
-.toggle-input:checked ~ .mega-menu, .menu-item {
+.toggle-input:checked ~ .mega-menu {
   display: block;
 }
 
@@ -48,4 +64,4 @@
   padding-left: 6px;
   position: relative;
   top: -1px;
-}
+} */

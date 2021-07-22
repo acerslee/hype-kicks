@@ -73,7 +73,6 @@ const Brandpage: React.FC<Props> = ({query}) => {
 
   useEffect(() => {
     if (window.screen.width < 750) {
-      console.log(mobileData)
       let slicedShoeData = mobileData.slice(0,10)
       setShoeData(slicedShoeData)
       setItemsToShow(10)

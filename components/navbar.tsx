@@ -59,9 +59,10 @@ const Navbar = () => {
                 Hello {user.user_metadata.full_name}
               </li>
             }
-            <li className = "toggleable hover:bg-green-900 hover:text-white">
-              <input type="checkbox" value="selected" id="toggle-one" className="toggle-input" />
-                <label htmlFor="toggle-one" className="block cursor-pointer py-6 px-4 lg:p-6 text-sm lg:text-base font-bold">Brands</label>
+            <li className = "hoverable hover:bg-green-900 hover:text-white">
+              {/* <input type="checkbox" value="selected" id="toggle-one" className="toggle-input" /> */}
+                {/* <label htmlFor="toggle-one" className="block cursor-pointer py-6 px-4 lg:p-6 text-sm lg:text-base font-bold">Brands</label> */}
+                <a href="#" className="relative block py-6 px-4 lg:p-6 text-sm lg:text-base font-bold hover:bg-green-900 hover:text-white">Brands</a>
                 <div role="toggle" className="p-6 mega-menu mb-16 sm:mb-0 shadow-xl bg-green-900 z-10">
                   <div className="container mx-auto w-full flex flex-wrap justify-between mx-2">
                     {renderMenuList(0, 7)}

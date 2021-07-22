@@ -8,7 +8,7 @@ const AuthContext = createContext({
   authReady: false
 });
 
-export function AuthContextProvider({children}: any) {
+export const AuthContextProvider = ({children}: any) => {
   const [ user, setUser ] = useState<any>(null);
   const [ authReady, setAuthReady ] = useState<boolean>(false);
 
