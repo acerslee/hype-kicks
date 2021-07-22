@@ -54,11 +54,11 @@ const Navbar = () => {
         </a>
         {authReady &&
           <ul className = "flex lg: mr-10">
-<!--             {user &&
+            {/*{user &&
               <li className = "relative block py-6 px-2 lg:p-6 text-sm lg:text-base">
                 Hello {user.user_metadata.full_name}
               </li>
-            } -->
+            } */}
             <li className = "hoverable hover:bg-green-900 hover:text-white">
               {/* <input type="checkbox" value="selected" id="toggle-one" className="toggle-input" /> */}
                 {/* <label htmlFor="toggle-one" className="block cursor-pointer py-6 px-4 lg:p-6 text-sm lg:text-base font-bold">Brands</label> */}
