@@ -12,7 +12,7 @@ type AppProps<P = any> = {
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }: AppProps) {
-    let pageProps = {query: null};
+    let pageProps = { query: String };
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
     }
