@@ -3,9 +3,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import AuthContext from '../netlify/authContext';
-// import { FaBars } from 'react-icons/fa';
-
-
 
 const Navbar = () => {
 
@@ -54,13 +51,12 @@ const Navbar = () => {
             height = {85}
           />
         </a>
-        {authReady &&
           <ul className = "flex lg: mr-10">
-            {/* {user &&
+            {user &&
               <li className = "relative block py-6 px-2 lg:p-6 text-sm lg:text-base">
                 Hello {user.user_metadata.full_name}
               </li>
-            } */}
+            }
             <li className = "hoverable hover:bg-green-900 hover:text-white">
               {/* <input type="checkbox" value="selected" id="toggle-one" className="toggle-input" /> */}
                 {/* <label htmlFor="toggle-one" className="block cursor-pointer py-6 px-4 lg:p-6 text-sm lg:text-base font-bold">Brands</label> */}
@@ -79,11 +75,9 @@ const Navbar = () => {
             </Link>
             {!user
               ? <li className = "relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold hover:bg-green-900 hover:text-white cursor-pointer" onClick = {login}>Login</li>
-              :
-              <li className = "relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold hover:bg-green-900 hover:text-white cursor-pointer" onClick = {logout}>Logout</li>
+              : <li className = "relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold hover:bg-green-900 hover:text-white cursor-pointer" onClick = {logout}>Logout</li>
             }
           </ul>
-        }
       </nav>
     </header>
   )
