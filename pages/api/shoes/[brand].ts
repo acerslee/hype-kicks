@@ -19,15 +19,15 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     "x-rapidapi-key": process.env.KEY
   }
 
-  redisClient.get('brand', async (error, brand) => {
+  redisClient.get(`brandList?brand=${brand}`, async (error, shoe) => {
     if (error) console.error(error)
-    if (brand) {
-      res.send(JSON.parse(brand))
+    if (shoe) {
+      res.send(JSON.parse(shoe))
     } else {
         await axios
           .get(url, {headers})
           .then(({data}) => {
-            redisClient.setex("brand", DEFAULT_EXPIRATION, JSON.stringify(data))
+            redisClient.setex(`brandList?brand=${brand}`, DEFAULT_EXPIRATION, JSON.stringify(data))
             res.send(data)
           })
           .catch(err => {
