@@ -11,6 +11,7 @@ const Home = () => {
     axios
       .get('/api/newest')
       .then(({data}) => {
+        console.log(data)
         setNewestSet(data.results)
       })
       .catch(err => console.error(err))

@@ -8,7 +8,6 @@ interface Props{
 const SEO: React.FC<Props> = path => {
 
   const dynamicTitle = (route: string) => {
-    console.log(route)
     if (route === '/') return "Home | Hype Kicks"
     if (route === '/about') return "About | Hype Kicks"
     if (route.includes('/brand')) return route.charAt(13).toUpperCase() + route.slice(14) + " | Hype Kicks"
