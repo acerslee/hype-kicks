@@ -6,7 +6,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const todayDate = new Date().toISOString().slice(0,10);
 
-  const redisClient = Redis.createClient()
+  const redisClient = Redis.createClient(process.env.REDIS_URL)
   const DEFAULT_EXPIRATION = 3600;
 
   const url = `https://v1-sneakers.p.rapidapi.com/v1/sneakers?limit=100&releaseDate=${todayDate}`

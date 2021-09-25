@@ -5,15 +5,12 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { brand } = req.query;
 
-  const redisClient = Redis.createClient()
+  const redisClient = Redis.createClient(process.env.REDIS_URL)
   const DEFAULT_EXPIRATION = 3600
 
   let url: string;
-  if (!req.body) {
-    url = `https://v1-sneakers.p.rapidapi.com/v1/sneakers?limit=100&releaseYear=2021&brand=${brand}`
-  } else {
-    url = `https://v1-sneakers.p.rapidapi.com/v1/sneakers?limit=100&releaseYear=${req.body.year}&brand=${brand}`
-  }
+  if (!req.body) url = `https://v1-sneakers.p.rapidapi.com/v1/sneakers?limit=100&releaseYear=2021&brand=${brand}`
+  else url = `https://v1-sneakers.p.rapidapi.com/v1/sneakers?limit=100&releaseYear=${req.body.year}&brand=${brand}`
 
   const headers = {
     "x-rapidapi-key": process.env.KEY
