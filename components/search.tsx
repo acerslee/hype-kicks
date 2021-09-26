@@ -7,12 +7,12 @@ interface Props{
 const Search: React.FC<Props> = ({ renderNewList }) => {
 
   const [gender, setGender] = useState<string>("none");
-  const [year, setYear] = useState<string>("2021")
+  const [year, setYear] = useState<string>("2021");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     renderNewList(gender, year)
-  }
+  };
 
   const handleGenderChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setGender(e.target.value)
@@ -22,11 +22,11 @@ const Search: React.FC<Props> = ({ renderNewList }) => {
     setYear(e.target.value)
   };
 
-
   return(
     <form
       className = "flex flex-col h-auto text-xl bg-gray-100 p-6 laptop:h-12v laptop:flex-row laptop:justify-center laptop:items-center laptop:space-x-8"
-      onSubmit = {handleSubmit}>
+      onSubmit = {handleSubmit}
+    >
       <select className = "text-xl p-3 my-2" id = "filter-gender" onChange = {handleGenderChange} defaultValue = {"none"}>
         <option value = "none">Select Gender</option>
         <option value = "child">Child</option>
@@ -48,7 +48,7 @@ const Search: React.FC<Props> = ({ renderNewList }) => {
       </select>
 
       <input
-        className = "bg-green-900 text-white text-xl p-3"
+        className = "bg-green-900 text-white text-xl p-3 hover:bg-green-700 cursor-pointer"
         type = "submit"
         value = "Search"
       />
