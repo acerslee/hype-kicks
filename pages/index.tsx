@@ -1,17 +1,17 @@
+import type { NextPage } from 'next'
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import axios from 'axios';
 import Link from 'next/link';
 
-const Home = () => {
+const Home: NextPage = () => {
 
-  const [ newestSet, setNewestSet ] = useState<(string | number)[]>([]);
+  const [ newestSet, setNewestSet ] = useState<(string | number)[]>([])
 
   useEffect(() => {
     axios
       .get('/api/newest')
       .then(({data}) => {
-        console.log(data)
         setNewestSet(data.results)
       })
       .catch(err => console.error(err))
@@ -20,7 +20,12 @@ const Home = () => {
   return (
     <main className = "h-full text-center">
       <div className = "relative h-60v laptop:h-90v ">
-        <Image src ="/main-page-shoe.jpg" alt = "main page shoe" layout = 'fill' objectFit = 'cover' />
+        <Image
+          src ="/main-page-shoe.jpg"
+          alt = "main page shoe"
+          layout = 'fill'
+          objectFit = 'cover'
+        />
       </div>
       <div className = "absolute bottom-45/100 left-2/4 transform -translate-x-2/4 -translate-y-2/4 text-orange-main-page text-4xl font-bold laptop:text-6xl laptop:top-2/4">Explore Your Next Addition.</div>
       {newestSet.length !== 0 &&
