@@ -1,10 +1,11 @@
-import Image from 'next/image';
+import type { NextPage } from 'next'
+import Image from 'next/image'
 
-const AboutPage = () => {
+const AboutPage: NextPage = () => {
 
   return(
     <>
-      <div className = "relative h-40v">
+      <div className = "relative h-40v w-full">
         <Image
           src = "/shoe.jpg"
           alt = "shoe collection"

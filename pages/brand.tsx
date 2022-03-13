@@ -1,18 +1,17 @@
+import type { NextPage } from 'next'
 import { useState, useEffect } from 'react';
 import Search from '../components/search';
 import axios from 'axios';
 import Image from 'next/image';
 import { window } from 'browser-monads';
 
-interface Query{
-  brand: string
+interface Props {
+  query: {
+    brand: string
+  }
 }
 
-interface Props{
-  query: Query
-}
-
-const Brandpage: React.FC<Props> = ({query}) => {
+const Brandpage: NextPage<Props> = ({ query }) => {
 
   const [ shoeData, setShoeData ] = useState<any>([]);
   const [ errorMessage, setErrorMessage ] = useState<boolean>(false)
@@ -114,7 +113,7 @@ const Brandpage: React.FC<Props> = ({query}) => {
           ))}
         </div>
       }
-      {window.screen.width < 750 && !errorMessage &&
+      {window.screen.width <= 711 && !errorMessage &&
         <>
           {itemsToShow >= mobileData.length
             ? <p className = "text-center mb-2">No more items to show.</p>

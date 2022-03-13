@@ -1,10 +1,10 @@
-import { useContext } from 'react';
+import { FC, useContext } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import AuthContext from '../netlify/authContext';
 
-const Navbar = () => {
+const Navbar: FC = () => {
 
   const router = useRouter();
   const { user, login, logout, authReady } = useContext(AuthContext);
@@ -14,6 +14,8 @@ const Navbar = () => {
 
   const handleBrandRoute = (brand: string) => {
     let lowercaseBrand = brand.toLowerCase()
+
+    console.log(brand)
 
     router.push({
       pathname: '/brand',

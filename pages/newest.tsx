@@ -1,36 +1,44 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { InferGetServerSidePropsType} from 'next'
 import Image from 'next/image';
+import { ShoeResponseTypes, ServerSidePropsDataType } from '../_types'
 
-const NewestShoes = () => {
+export const getServerSideProps = async () => {
+  const res = await fetch(`http://localhost:3000/api/newest`)
+  const data: ServerSidePropsDataType  = await res.json()
 
-  const [ newestSet, setNewestSet ] = useState<(string | number)[]>([]);
+  if (!data) {
+    return {
+      notFound: true,
+    }
+  }
 
-  useEffect(() => {
-    axios
-      .get('/api/newest')
-      .then(({data}) => setNewestSet(data.results))
-      .catch(err => console.error(err))
-  },[])
+  return {
+    props: {
+      data
+    }
+  }
+}
+
+const NewestShoes = ({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 
   return(
     <>
       <h1 className = "text-4xl text-gray-600 text-center mt-4 desktop:text-3xl">Today's Releases</h1>
       <div className = "grid grid-cols-1 gap-7 w-11/12 mb-4 mx-auto desktop:grid-cols-4 laptop:grid-cols-3 laptop:gap-5">
-            {newestSet.map((shoe: any) => (
+            {data.results.map((shoe: ShoeResponseTypes) => (
               <div key = {shoe.id} className = "bg-gray-50">
                 <div className = "relative h-30v">
                   {shoe.media.imageUrl
                     ?  <Image
                           src = {shoe.media.imageUrl}
                           layout = 'fill'
-                          objectFit = 'cover'
+                          objectFit = 'contain'
                           alt = "shoe"
                         />
                     :  <Image
                           src = '/no-image.jpg'
                           layout = 'fill'
-                          objectFit = 'cover'
+                          objectFit = 'contain'
                           alt = "shoe"
                         />
                   }
@@ -47,6 +55,6 @@ const NewestShoes = () => {
           </div>
     </>
   )
-};
+}
 
-export default NewestShoes;
+export default NewestShoes

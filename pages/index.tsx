@@ -1,38 +1,45 @@
-import type { NextPage } from 'next'
-import { useState, useEffect } from 'react';
-import Image from 'next/image';
-import axios from 'axios';
-import Link from 'next/link';
+import { InferGetServerSidePropsType} from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
+import { ShoeResponseTypes, ServerSidePropsDataType } from '../_types'
 
-const Home: NextPage = () => {
+export const getServerSideProps = async () => {
+  const res = await fetch(`http://localhost:3000/api/newest`)
+  const data: ServerSidePropsDataType  = await res.json()
 
-  const [ newestSet, setNewestSet ] = useState<(string | number)[]>([])
+  if (!data) {
+    return {
+      notFound: true,
+    }
+  }
 
-  useEffect(() => {
-    axios
-      .get('/api/newest')
-      .then(({data}) => {
-        setNewestSet(data.results)
-      })
-      .catch(err => console.error(err))
-  },[])
+  return {
+    props: {
+      data
+    }
+  }
+}
+
+const Home = ({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const { count, results } = data
 
   return (
     <main className = "h-full text-center">
       <div className = "relative h-60v laptop:h-90v ">
         <Image
           src ="/main-page-shoe.jpg"
-          alt = "main page shoe"
-          layout = 'fill'
-          objectFit = 'cover'
+          alt="main page shoe"
+          layout='fill'
+          objectFit='cover'
+          priority
         />
       </div>
       <div className = "absolute bottom-45/100 left-2/4 transform -translate-x-2/4 -translate-y-2/4 text-orange-main-page text-4xl font-bold laptop:text-6xl laptop:top-2/4">Explore Your Next Addition.</div>
-      {newestSet.length !== 0 &&
+      {count > 0 &&
         <section id = "newest-shoes">
           <h1 className = "text-4xl text-gray-600 text-center mb-4 desktop:text-3xl desktop:text-left desktop:ml-2">Today's Releases</h1>
           <div className = "grid grid-cols-1 gap-2 mx-2 mb-2 desktop:grid-cols-5 laptop:grid-cols-3 phone:gap-5 phone:grid-cols-2">
-            {newestSet.slice(0,5).map((shoe: any) => (
+            {results.slice(0,5).map((shoe: ShoeResponseTypes) => (
               <div key = {shoe.id} className = "bg-gray-50 text-left">
                 <div className = "relative h-20v">
                     {shoe.media.imageUrl
@@ -60,7 +67,7 @@ const Home: NextPage = () => {
               </div>
             ))}
             </div>
-            {newestSet.length > 5 &&
+            {count > 5 &&
               <Link href = '/newest'>
                 <p className = "text-center text-gray-500 mr-4 hover:text-blue-600 cursor-pointer desktop:text-right">SEE MORE</p>
               </Link>
@@ -71,4 +78,4 @@ const Home: NextPage = () => {
   )
 }
 
-export default Home;
+export default Home
