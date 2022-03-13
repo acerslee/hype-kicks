@@ -11,21 +11,6 @@ type AppProps<P = any> = {
   router: P
 }
 
-// class MyApp extends App {
-
-//   render() {
-//     const { Component, pageProps } = this.props
-//     return(
-//       <AuthContextProvider>
-//         <SEO path = {this.props.router.asPath}/>
-//         <Navbar />
-//         <Component {...pageProps} />
-//         <Footer />
-//       </AuthContextProvider>
-//     )
-//   }
-// }
-
 const MyApp: NextPage<AppProps> = ({ Component, pageProps, router }) => {
   return (
     <AuthContextProvider>

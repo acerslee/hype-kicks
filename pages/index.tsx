@@ -1,21 +1,21 @@
-import { InferGetServerSidePropsType} from 'next'
+import { InferGetServerSidePropsType, GetServerSideProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ShoeResponseTypes, ServerSidePropsDataType } from '../_types'
 
-export const getServerSideProps = async () => {
-  const res = await fetch(`http://localhost:3000/api/newest`)
-  const data: ServerSidePropsDataType  = await res.json()
+export const getServerSideProps: GetServerSideProps<ServerSidePropsDataType> = async () => {
+  try {
+    const res = await fetch(`http://localhost:3000/api/newest`)
+    const data = await res.json()
 
-  if (!data) {
+    return {
+      props: {
+        data
+      }
+    }
+  } catch(e) {
     return {
       notFound: true,
-    }
-  }
-
-  return {
-    props: {
-      data
     }
   }
 }
