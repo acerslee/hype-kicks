@@ -1,23 +1,40 @@
-import type { NextPage } from 'next'
+import { InferGetServerSidePropsType, GetServerSideProps } from 'next'
+import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
 import Search from '../components/search'
 import axios from 'axios'
 import Image from 'next/image'
 import { window } from 'browser-monads'
+import { ShoeResponseTypes, ServerSidePropsDataType } from '../_types'
 
-interface Props {
-  query: {
-    brand: string
+export const getServerSideProps: GetServerSideProps<ServerSidePropsDataType> = async ({
+  query,
+}) => {
+  try {
+    const res = await fetch(`http://localhost:3000/api/shoes/${query.brand}`)
+    const serverData = await res.json()
+
+    return {
+      props: {
+        serverData,
+      },
+    }
+  } catch (e) {
+    return {
+      notFound: true,
+    }
   }
 }
 
-const Brandpage: NextPage<Props> = ({ query }) => {
-  const [shoeData, setShoeData] = useState<any>([])
+const Brandpage = ({ serverData }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const router = useRouter()
+  const { query } = router
+  const [shoeData, setShoeData] = useState<ShoeResponseTypes[]>(serverData.results)
   const [errorMessage, setErrorMessage] = useState<boolean>(false)
 
   //for mobile view only
   const [itemsToShow, setItemsToShow] = useState<number>(10)
-  const [mobileData, setMobileData] = useState<any>([])
+  const [mobileData, setMobileData] = useState<ShoeResponseTypes[]>([])
 
   useEffect(() => {
     axios
@@ -28,7 +45,7 @@ const Brandpage: NextPage<Props> = ({ query }) => {
         } else {
           setErrorMessage(false)
           setShoeData(data.results)
-          if (window.screen.width < 750) {
+          if (window.screen.width <= 711) {
             setMobileData(data.results)
           }
         }
@@ -37,10 +54,7 @@ const Brandpage: NextPage<Props> = ({ query }) => {
       .catch(err => console.error(err))
   }, [query.brand])
 
-  const renderNewList = async (
-    gender: string = 'none',
-    year: string = 'none',
-  ) => {
+  const renderNewList = async (gender: string = 'none', year: string = 'none') => {
     try {
       setItemsToShow(10)
 
@@ -55,9 +69,7 @@ const Brandpage: NextPage<Props> = ({ query }) => {
       }
 
       if (gender !== 'none') {
-        const results = shoeData.filter(
-          (shoe: { gender: string }) => shoe.gender === gender,
-        )
+        const results = shoeData.filter((shoe: { gender: string }) => shoe.gender === gender)
         setShoeData(results)
       }
 
@@ -77,7 +89,7 @@ const Brandpage: NextPage<Props> = ({ query }) => {
   }
 
   useEffect(() => {
-    if (window.screen.width < 750) {
+    if (window.screen.width <= 711) {
       let slicedShoeData = mobileData.slice(0, 10)
       setShoeData(slicedShoeData)
       setItemsToShow(10)
@@ -89,7 +101,7 @@ const Brandpage: NextPage<Props> = ({ query }) => {
       <Search renderNewList={renderNewList} />
       {shoeData.length > 0 && (
         <div className="grid grid-cols-1 gap-7 w-11/12 mb-4 mx-auto laptop:grid-cols-2 laptop:gap-4 desktop:grid-cols-4 ">
-          {shoeData.map((shoe: any) => (
+          {shoeData.map((shoe: ShoeResponseTypes) => (
             <div key={shoe.id} className="bg-gray-50">
               <div className="relative h-30v">
                 {shoe.media.imageUrl ? (
@@ -98,14 +110,10 @@ const Brandpage: NextPage<Props> = ({ query }) => {
                     layout="fill"
                     objectFit="cover"
                     alt="shoe"
+                    priority
                   />
                 ) : (
-                  <Image
-                    src="/no-image.jpg"
-                    layout="fill"
-                    objectFit="cover"
-                    alt="shoe"
-                  />
+                  <Image src="/no-image.jpg" layout="fill" objectFit="cover" alt="shoe" priority />
                 )}
               </div>
               <div className="ml-3">

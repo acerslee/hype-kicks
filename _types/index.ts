@@ -18,8 +18,8 @@ export interface ShoeResponseTypes {
 }
 
 export interface ServerSidePropsDataType {
-  data: {
-    count?: number
-    results?: ShoeResponseTypes[]
+  serverData: {
+    count: number
+    results: ShoeResponseTypes[]
   }
 }

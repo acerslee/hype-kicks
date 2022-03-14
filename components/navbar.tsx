@@ -1,7 +1,7 @@
 import { FC, useContext } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+import Router, { useRouter } from 'next/router'
 import AuthContext from '../netlify/authContext'
 
 const Navbar: FC = () => {
@@ -43,7 +43,13 @@ const Navbar: FC = () => {
   const handleBrandRoute = (brand: string) => {
     const lowercaseBrand = brand.toLowerCase()
 
-    router.push({
+    const query = { brand: lowercaseBrand }
+    // const url = { pathname: '/brand/[brand]', query }
+    const urlAs = { pathname: `/brand`, query }
+
+    // router.push(urlAs)
+
+    Router.push({
       pathname: '/brand',
       query: { brand: lowercaseBrand },
     })
@@ -89,10 +95,7 @@ const Navbar: FC = () => {
             >
               Brands
             </a>
-            <div
-              role="toggle"
-              className="p-6 mega-menu mb-16 sm:mb-0 shadow-xl bg-green-900 z-10"
-            >
+            <div role="toggle" className="p-6 mega-menu mb-16 sm:mb-0 shadow-xl bg-green-900 z-10">
               <div className="container mx-auto w-full flex flex-wrap justify-between mx-2">
                 {renderMenuList(0, 7)}
                 {renderMenuList(7, 14)}
