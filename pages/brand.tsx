@@ -77,7 +77,6 @@ const Brandpage: NextPage<Props> = ({ query }) => {
       setItemsToShow(10)
     }
   }, [mobileData])
-  //
 
   return(
     <>
