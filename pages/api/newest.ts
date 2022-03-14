@@ -1,18 +1,17 @@
-import axios from "axios"
-import Redis from "redis"
+import axios from 'axios'
+import Redis from 'redis'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-
-  const todayDate = new Date().toISOString().slice(0,10);
+  const todayDate = new Date().toISOString().slice(0, 10)
 
   const redisClient = Redis.createClient(process.env.REDIS_URL)
-  const DEFAULT_EXPIRATION = 3600;
+  const DEFAULT_EXPIRATION = 3600
 
   const url = `https://v1-sneakers.p.rapidapi.com/v1/sneakers?limit=100&releaseDate=${todayDate}`
 
   const headers = {
-    "x-rapidapi-key": process.env.KEY
+    'x-rapidapi-key': process.env.KEY,
   }
 
   redisClient.get('newest', async (error, newest) => {
@@ -20,15 +19,15 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     if (newest) {
       res.send(JSON.parse(newest))
     } else {
-        await axios
-          .get(url, {headers})
-          .then(({data}) => {
-            redisClient.setex("newest", DEFAULT_EXPIRATION, JSON.stringify(data))
-            res.send(data)
-          })
-          .catch(err => {
-            res.status(500).send(err)
-          })
+      await axios
+        .get(url, { headers })
+        .then(({ data }) => {
+          redisClient.setex('newest', DEFAULT_EXPIRATION, JSON.stringify(data))
+          res.send(data)
+        })
+        .catch(err => {
+          res.status(500).send(err)
+        })
     }
   })
 }
