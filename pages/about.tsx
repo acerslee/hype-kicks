@@ -5,7 +5,7 @@ const AboutPage: NextPage = () => {
   return (
     <>
       <div className="relative h-40v w-full">
-        <Image src="/shoe.jpg" alt="shoe collection" layout="fill" objectFit="cover" />
+        <Image src="/shoe.jpg" alt="shoe collection" layout="fill" objectFit="cover" priority />
       </div>
       <article className="w-3/4 flex flex-col justify-center mx-auto h-60v mb-5 laptop:h-40v">
         <h2 className="font-bold text-5xl my-4 border-b-4">About Us</h2>

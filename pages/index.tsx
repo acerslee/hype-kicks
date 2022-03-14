@@ -3,16 +3,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ShoeResponseTypes, ServerSidePropsDataType } from '../_types'
 
-export const getServerSideProps: GetServerSideProps<
-  ServerSidePropsDataType
-> = async () => {
+export const getServerSideProps: GetServerSideProps<ServerSidePropsDataType> = async () => {
   try {
     const res = await fetch(`http://localhost:3000/api/newest`)
-    const data = await res.json()
+    const serverData = await res.json()
 
     return {
       props: {
-        data,
+        serverData,
       },
     }
   } catch (e) {
@@ -22,10 +20,8 @@ export const getServerSideProps: GetServerSideProps<
   }
 }
 
-const Home = ({
-  data,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const { count, results } = data
+const Home = ({ serverData }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const { count, results } = serverData
 
   return (
     <main className="h-full text-center">
@@ -51,19 +47,9 @@ const Home = ({
               <div key={shoe.id} className="bg-gray-50 text-left">
                 <div className="relative h-20v">
                   {shoe.media.imageUrl ? (
-                    <Image
-                      src={shoe.media.imageUrl}
-                      layout="fill"
-                      objectFit="cover"
-                      alt="shoe"
-                    />
+                    <Image src={shoe.media.imageUrl} layout="fill" objectFit="cover" alt="shoe" />
                   ) : (
-                    <Image
-                      src="/no-image.jpg"
-                      layout="fill"
-                      objectFit="cover"
-                      alt="shoe"
-                    />
+                    <Image src="/no-image.jpg" layout="fill" objectFit="cover" alt="shoe" />
                   )}
                 </div>
                 <div className="ml-3">

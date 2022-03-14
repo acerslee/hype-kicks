@@ -28,9 +28,15 @@ const NewestShoes = ({ serverData }: InferGetServerSidePropsType<typeof getServe
           <div key={shoe.id} className="bg-gray-50">
             <div className="relative h-30v">
               {shoe.media.imageUrl ? (
-                <Image src={shoe.media.imageUrl} layout="fill" objectFit="contain" alt="shoe" />
+                <Image
+                  src={shoe.media.imageUrl}
+                  layout="fill"
+                  objectFit="contain"
+                  alt="shoe"
+                  priority
+                />
               ) : (
-                <Image src="/no-image.jpg" layout="fill" objectFit="contain" alt="shoe" />
+                <Image src="/no-image.jpg" layout="fill" objectFit="contain" alt="shoe" priority />
               )}
             </div>
             <div className="ml-3">
