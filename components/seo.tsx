@@ -6,7 +6,7 @@ interface Props {
 }
 
 const SEO: FC<Props> = path => {
-  const dynamicTitle = (route: string) => {
+  const dynamicTitle = (route: string): string => {
     if (route === '/') return 'Home | Hype Kicks'
     if (route === '/about') return 'About | Hype Kicks'
     if (route.includes('/brand'))

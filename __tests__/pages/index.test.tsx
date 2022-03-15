@@ -1,23 +1,29 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import Home from '../pages'
-import { ShoeResponseTypes } from '../_types'
+import Home from '../../pages'
+import { ShoeResponseTypes } from '../../_types'
 
 describe('The home page should render properly', () => {
-  it('should show banner on the top of the main image', () => {
-    render(<Home />)
+  // it('should show banner on the top of the main image', () => {
+  //   const value = getServerSideProps()
+  //   expect(value).toEqual({
+  //     props: {
+  //       count: 0,
+  //       results: [],
+  //     },
+  //   })
+  //   render(<Home serverData={serverData} />)
 
-    const mainPageHeading = screen.getByText('Explore Your Next Addition.')
-    expect(mainPageHeading).toBeInTheDocument
-  })
+  //   const mainPageHeading = screen.getByText('Explore Your Next Addition.')
+  //   expect(mainPageHeading).toBeInTheDocument
+  // })
 
   it('tests useState setState to be called', () => {
     const setStateMock = jest.fn()
     const useStateMock: any = (useState: ShoeResponseTypes[]) => [useState, setStateMock]
     jest.spyOn(React, 'useState').mockImplementation(useStateMock)
   })
-
 })
 
 // describe('Newest shoes', () => {

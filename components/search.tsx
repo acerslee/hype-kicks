@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useState, FormEvent, ChangeEvent } from 'react'
 
 interface Props {
   renderNewList: (gender: string, year: string) => void
@@ -8,16 +8,16 @@ const Search: FC<Props> = ({ renderNewList }) => {
   const [gender, setGender] = useState<string>('none')
   const [year, setYear] = useState<string>('2021')
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
     renderNewList(gender, year)
   }
 
-  const handleGenderChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleGenderChange = (e: ChangeEvent<HTMLSelectElement>): void => {
     setGender(e.target.value)
   }
 
-  const handleYearChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleYearChange = (e: ChangeEvent<HTMLSelectElement>): void => {
     setYear(e.target.value)
   }
 
@@ -28,6 +28,7 @@ const Search: FC<Props> = ({ renderNewList }) => {
     >
       <select
         className="text-xl p-3 my-2"
+        role="tablist"
         id="filter-gender"
         onChange={handleGenderChange}
         defaultValue={'none'}
@@ -45,6 +46,7 @@ const Search: FC<Props> = ({ renderNewList }) => {
       <select
         className="text-xl p-3 my-2"
         id="filter-year"
+        role={'tablist'}
         onChange={handleYearChange}
         defaultValue={'none'}
       >

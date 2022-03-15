@@ -1,11 +1,10 @@
-import { FC, useContext } from 'react'
+import React, { FC, ReactElement, useContext } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import Router, { useRouter } from 'next/router'
+import Router from 'next/router'
 import AuthContext from '../netlify/authContext'
 
 const Navbar: FC = () => {
-  const router = useRouter()
   const { user, login, logout, authReady } = useContext(AuthContext)
 
   //there's an API route, but have to hard-code the brands to avoid API call limitation with current plan
@@ -40,14 +39,8 @@ const Navbar: FC = () => {
     'ADIDAS',
   ]
 
-  const handleBrandRoute = (brand: string) => {
+  const handleBrandRoute = (brand: string): void => {
     const lowercaseBrand = brand.toLowerCase()
-
-    const query = { brand: lowercaseBrand }
-    // const url = { pathname: '/brand/[brand]', query }
-    const urlAs = { pathname: `/brand`, query }
-
-    // router.push(urlAs)
 
     Router.push({
       pathname: '/brand',
@@ -55,8 +48,8 @@ const Navbar: FC = () => {
     })
   }
 
-  const renderMenuList = (indexOne: number, indexTwo: number) => {
-    let menuList = brands.slice(indexOne, indexTwo)
+  const renderMenuList = (indexOne: number, indexTwo: number): ReactElement => {
+    const menuList = brands.slice(indexOne, indexTwo)
 
     return (
       <ul className="px-4 w-full sm:w-1/2 lg:w-1/4 border-gray-600 border-b sm:border-r lg:border-b-0 pb-6 pt-6 lg:pt-3">
@@ -76,7 +69,7 @@ const Navbar: FC = () => {
 
   return (
     <header className="relative bg-white border-b-2 border-gray-300 text-gray-900">
-      <nav className="container mx-auto flex  justify-between">
+      <nav className="container mx-auto flex justify-between">
         <a href="/">
           <Image src="/shoe-logo.png" alt="Shoe Brand" width={85} height={85} />
         </a>

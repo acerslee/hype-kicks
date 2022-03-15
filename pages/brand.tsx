@@ -54,7 +54,7 @@ const Brandpage = ({ serverData }: InferGetServerSidePropsType<typeof getServerS
       .catch(err => console.error(err))
   }, [query.brand])
 
-  const renderNewList = async (gender: string = 'none', year: string = 'none') => {
+  const renderNewList = async (gender: string = 'none', year: string = 'none'): Promise<void> => {
     try {
       setItemsToShow(10)
 
@@ -83,14 +83,14 @@ const Brandpage = ({ serverData }: InferGetServerSidePropsType<typeof getServerS
   }
 
   //for mobile view only
-  const showMoreLoader = () => {
+  const showMoreLoader = (): void => {
     setShoeData(mobileData.slice(0, itemsToShow + 10))
     setItemsToShow(itemsToShow + 10)
   }
 
   useEffect(() => {
     if (window.screen.width <= 711) {
-      let slicedShoeData = mobileData.slice(0, 10)
+      const slicedShoeData = mobileData.slice(0, 10)
       setShoeData(slicedShoeData)
       setItemsToShow(10)
     }
